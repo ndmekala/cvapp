@@ -1,0 +1,15 @@
+.container {
+    width: auto;
+    max-width: 680px;
+    padding: 0 15px;
+  }
+
+.footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.fullheight {
+    height: 100vh;
+}
