@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import uniqid from 'uniqid';
 import Footer from './components/Footer'
 import Contact from './components/Contact'
 import Education from './components/Education'
 import Experience from './components/Experience'
+
 
 class App extends Component {
 
@@ -26,7 +28,28 @@ class App extends Component {
         }
       },
       // No. isInFormMode should just be part of each one. edit indivudally.
-      experience: {
+      experience: [
+        {
+          id: uniqid(),
+          isInFormMode: true,
+          liveInfo: {
+            position: '',
+            employer: '',
+            start: '',
+            end: '',
+            bullets: [],
+          },
+          savedInfo: {
+            position: '',
+            employer: '',
+            start: '',
+            end: '',
+            bullets: [],
+          }
+        },
+      ],
+      experience2: {
+
         isInFormMode: true,
         experienceArray: [
           {
@@ -59,7 +82,11 @@ class App extends Component {
     this.handleEducationEdit = this.handleEducationEdit.bind(this);
 
   }
-
+  idToObjectInArray(array, id){
+    let arr = array.forEach(obj => obj.id === id);
+    // return the array or location in array??
+    return arr[0];
+  }
   setContactFormMode() {
       this.setState(prevState => ({
         contact: {
@@ -136,12 +163,13 @@ class App extends Component {
       }
     }), () => console.table(this.state))
   }
-
-  setExperienceFormMode() {
+  // how to make 
+  setExperienceFormMode(id) {
     this.state.experience.isInFormMode ? this.setState({experience: {isInFormMode: 0}}) : this.setState({experience: {isInFormMode: 1}})
   }
-  handleExperienceEdit() {
+  handleExperienceEdit(e) {
     this.setExperienceFormMode();
+    // these will make use of this.idToObjectInArray(id[from e], this.state.experience)
   }
   handleExperienceSubmit(e) {
     e.preventDefault();
@@ -178,10 +206,11 @@ class App extends Component {
             handleContactEdit={this.handleContactEdit}/>))} */}
             
             <h1 className="text-muted">Experience</h1>
-            <Experience isInFormMode={this.state.experience.isInFormMode} 
-            handleExperienceSubmit={this.handleExperienceSubmit} 
-            handleExperienceEdit={this.handleExperienceEdit} />
-            
+            {this.state.experience.map(exp => (
+              <Experience experience={exp}
+              handleExperienceSubmit={this.handleExperienceSubmit} 
+              handleExperienceEdit={this.handleExperienceEdit} />
+            ))}
             <h1 className="text-muted">Education</h1>
             <Education isInFormMode={this.state.education.isInFormMode} 
             handleEducationSubmit={this.handleEducationSubmit} 
