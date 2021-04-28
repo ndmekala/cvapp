@@ -83,7 +83,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="fullheight">
+      <div className="d-flex flex-column h-100">
         <main className="flex-shrink-0">
           <div className="container">
             <h1 clasName="mt-5">Contact</h1>
