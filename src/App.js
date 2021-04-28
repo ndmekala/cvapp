@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Footer from './components/Footer'
 import Contact from './components/Contact'
+import Education from './components/Education'
+import Experience from './components/Experience'
 
 class App extends Component {
 
@@ -10,21 +12,73 @@ class App extends Component {
     this.state = {
       contact: {
         isInFormMode: 1,
+        liveVars: {
+
+        },
+        savedVars: {
+
+        }
+      },
+      experience: {
+        isInFormMode: 1,
+        experienceArray: [
+          {
+
+          },
+        ],
+      },
+      education: {
+        isInFormMode: 1,
+        educationArray: [
+          {
+
+          },
+        ],
       },
     }
 
-    this.setFormMode = this.setFormMode.bind(this);
+    this.setContactFormMode = this.setContactFormMode.bind(this);
     this.handleContactSubmit = this.handleContactSubmit.bind(this);
-  }handleContactSubmit
-
-  setFormMode() {
-    this.state.contact.isInFormMode ? this.setState({contact: {isInFormMode: 0}}) : this.setState({contact: {isInFormMode: 1}})
+    this.handleContactEdit = this.handleContactEdit.bind(this);
+    this.setExperienceFormMode = this.setExperienceFormMode.bind(this);
+    this.handleExperienceSubmit = this.handleExperienceSubmit.bind(this);
+    this.handleExperienceEdit = this.handleExperienceEdit.bind(this);
+    this.setEducationFormMode = this.setEducationFormMode.bind(this);
+    this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
+    this.handleEducationEdit = this.handleEducationEdit.bind(this);
   }
 
+  setContactFormMode() {
+    this.state.contact.isInFormMode ? this.setState({contact: {isInFormMode: 0}}) : this.setState({contact: {isInFormMode: 1}})
+  }
+  handleContactEdit() {
+    this.setContactFormMode();
+  }
   handleContactSubmit(e) {
     e.preventDefault();
-    this.setFormMode();
-    console.log('yeah!');
+    this.setContactFormMode();
+  }
+
+  setExperienceFormMode() {
+    this.state.experience.isInFormMode ? this.setState({experience: {isInFormMode: 0}}) : this.setState({experience: {isInFormMode: 1}})
+  }
+  handleExperienceEdit() {
+    this.setExperienceFormMode();
+  }
+  handleExperienceSubmit(e) {
+    e.preventDefault();
+    this.setExperienceFormMode();
+  }
+
+  setEducationFormMode() {
+    this.state.education.isInFormMode ? this.setState({education: {isInFormMode: 0}}) : this.setState({education: {isInFormMode: 1}})
+  }
+  handleEducationEdit() {
+    this.setEducationFormMode();
+  }
+  handleEducationSubmit(e) {
+    e.preventDefault();
+    this.setEducationFormMode();
   }
 
   render() {
@@ -33,9 +87,11 @@ class App extends Component {
         <main className="flex-shrink-0">
           <div className="container">
             <h1 clasName="mt-5">Contact</h1>
-            <Contact isInFormMode={this.state.contact.isInFormMode} handleContactSubmit={this.handleContactSubmit}/>
-            <button className="btn btn-primary" onClick={this.setFormMode}>Y’all.</button>
-  
+            <Contact isInFormMode={this.state.contact.isInFormMode} handleContactSubmit={this.handleContactSubmit} handleContactEdit={this.handleContactEdit}/>
+            <h1 clasName="mt-5">Experience</h1>
+            <Experience isInFormMode={this.state.experience.isInFormMode} handleExperienceSubmit={this.handleExperienceSubmit} handleExperienceEdit={this.handleExperienceEdit} />
+            <h1 clasName="mt-5">Education</h1>
+            <Education isInFormMode={this.state.education.isInFormMode} handleEducationSubmit={this.handleEducationSubmit} handleEducationEdit={this.handleEducationEdit}/>
           </div>
         </main>
         <Footer />

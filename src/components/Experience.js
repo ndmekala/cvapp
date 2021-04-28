@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Contact extends Component {
+class Experience extends Component {
     constructor(props) {
         super (props)
     }
@@ -26,16 +26,16 @@ class Contact extends Component {
                         <label for="address">Address</label>
                         <input type="text" className="form-control" id="address" placeholder="e.g. 111 Fairfax Ln. Beverly Hills, CA 90210 "></input>
                     </div>
-                    <button type="submit" className="btn btn-primary" onClick={this.props.handleContactSubmit}>Submit</button>
+                    <button type="submit" className="btn btn-primary" onClick={this.props.handleExperienceSubmit}>Submit</button>
                 </form>
             )
         } else {
             return (
-                <button className="btn btn-primary" onClick={this.props.handleContactEdit}>Edit</button>
+                <button className="btn btn-primary" onClick={this.props.handleExperienceEdit}>Edit</button>
             )
         }
         
     }
 }
 
-export default Contact
+export default Experience
