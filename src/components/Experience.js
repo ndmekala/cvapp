@@ -11,22 +11,22 @@ class Experience extends Component {
             return (
                 <form>
                     <div className="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" className="form-control" id="name" placeholder="e.g. Jane Doe"></input>
+                        <label htmlFor="name">Name</label>
+                        <input type="text" className="form-control" id="name" placeholder="e.g. Jane Doe" onChange={this.props.handleNameChange}></input>
                     </div>
                     <div className="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" className="form-control" id="email" placeholder="e.g. janedoe@gmail.com"></input>
+                        <label htmlFor="email">Email</label>
+                        <input type="email" className="form-control" id="email" placeholder="e.g. janedoe@gmail.com" onChange={this.props.handleEmailChange}></input>
                     </div>
                     <div className="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="text" className="form-control" id="phone" placeholder="e.g. (111) 111 1111"></input>
+                        <label htmlFor="phone">Phone</label>
+                        <input type="text" className="form-control" id="phone" placeholder="e.g. (111) 111 1111" onChange={this.props.handlePhoneChange}></input>
                     </div>
                     <div className="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" className="form-control" id="address" placeholder="e.g. 111 Fairfax Ln. Beverly Hills, CA 90210 "></input>
+                        <label htmlFor="address">Address</label>
+                        <input type="text" className="form-control" id="address" placeholder="e.g. 111 Fairfax Ln. Beverly Hills, CA 90210" onChange={this.props.handleAddressChange}></input>
                     </div>
-                    <button type="submit" className="btn btn-primary" onClick={this.props.handleExperienceSubmit}>Submit</button>
+                    <button type="submit" className="btn btn-primary btn-top-margin" onClick={this.props.handleExperienceSubmit}>Submit</button>
                 </form>
             )
         } else {

@@ -13,3 +13,13 @@
 h1 {
     margin-top: 3.125rem;
 }
+
+.btn-top-margin {
+    margin-top: 0.875rem;
+}
+
+.para-nospacing {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    padding-bottom: 0rem;
+}
