@@ -77,15 +77,14 @@ class App extends Component {
     this.setExperienceFormMode = this.setExperienceFormMode.bind(this);
     this.handleExperienceSubmit = this.handleExperienceSubmit.bind(this);
     this.handleExperienceEdit = this.handleExperienceEdit.bind(this);
+    this.handleAddExperience = this.handleAddExperience.bind(this);
     this.setEducationFormMode = this.setEducationFormMode.bind(this);
     this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
     this.handleEducationEdit = this.handleEducationEdit.bind(this);
 
   }
-  idToObjectInArray(array, id){
-    let arr = array.forEach(obj => obj.id === id);
-    // return the array or location in array??
-    return arr[0];
+  idToIndex(array, id){
+    return array.findIndex(element => element.id === id);
   }
   setContactFormMode() {
       this.setState(prevState => ({
@@ -163,17 +162,48 @@ class App extends Component {
       }
     }), () => console.table(this.state))
   }
-  // how to make 
+  
   setExperienceFormMode(id) {
-    this.state.experience.isInFormMode ? this.setState({experience: {isInFormMode: 0}}) : this.setState({experience: {isInFormMode: 1}})
+    const index = this.idToIndex(this.state.experience, id)
+    this.setState(prevState => ({
+      experience: [
+        ...prevState.experience.slice(0, index),
+        Object.assign({}, this.state.experience[index], {isInFormMode: !this.state.experience[index].isInFormMode}),
+        ...prevState.experience.slice(index+1)
+      ]
+    }))    
   }
   handleExperienceEdit(e) {
-    this.setExperienceFormMode();
-    // these will make use of this.idToObjectInArray(id[from e], this.state.experience)
+    this.setExperienceFormMode(e.target.id);
   }
   handleExperienceSubmit(e) {
     e.preventDefault();
-    this.setExperienceFormMode();
+    this.setExperienceFormMode(e.target.id);
+  }
+  handleAddExperience() {
+    this.setState(prevState => ({
+      experience: [
+        ...prevState.experience,
+        {
+          id: uniqid(),
+          isInFormMode: true,
+          liveInfo: {
+            position: '',
+            employer: '',
+            start: '',
+            end: '',
+            bullets: [],
+          },
+          savedInfo: {
+            position: '',
+            employer: '',
+            start: '',
+            end: '',
+            bullets: [],
+          }
+        }
+      ]
+    }))
   }
 
   setEducationFormMode() {
@@ -200,17 +230,18 @@ class App extends Component {
             handleEmailChange={this.handleEmailChange}
             handlePhoneChange={this.handlePhoneChange}
             handleAddressChange={this.handleAddressChange}/>
-
-            {/* {[1,2].map(item => (<Contact isInFormMode={this.state.contact.isInFormMode}
-            handleContactSubmit={this.handleContactSubmit} 
-            handleContactEdit={this.handleContactEdit}/>))} */}
-            
             <h1 className="text-muted">Experience</h1>
             {this.state.experience.map(exp => (
               <Experience experience={exp}
+              handlePositionChange={this.handlePositionChange} // BUILD THIS
+              handleEmployerChange={this.handleEmployerChange} // BUILD THIS
+              handleExpStartChange={this.handleExpStartChange} // BUILD THIS
+              handleExpEndChange={this.handleExpEndChange} // BUILD THIS
+              handleDeleteExperience={this.handleDeleteExperience} // BUILD THIS
               handleExperienceSubmit={this.handleExperienceSubmit} 
               handleExperienceEdit={this.handleExperienceEdit} />
             ))}
+            <button className="btn btn-primary btn-top-margin" onClick={this.handleAddExperience}>Add Experience</button>
             <h1 className="text-muted">Education</h1>
             <Education isInFormMode={this.state.education.isInFormMode} 
             handleEducationSubmit={this.handleEducationSubmit} 

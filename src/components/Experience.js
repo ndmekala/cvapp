@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Bullets from './Bullets'
 
 class Experience extends Component {
     constructor(props) {
@@ -9,44 +10,49 @@ class Experience extends Component {
         
         if (this.props.experience.isInFormMode) {
             return (
-                <form>
+                <div>
+                    <form>
                     <div className="form-group">
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor={this.props.experience.id + "-position"}>Position</label>
                         <input type="text" 
                         className="form-control" 
-                        id="name" 
-                        placeholder="e.g. Jane Doe" 
-                        onChange={this.props.handleNameChange}></input>
+                        id={this.props.experience.id + "-position"}
+                        placeholder="e.g. Junior Developer" 
+                        onChange={this.props.handlePositionChange}></input>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" 
-                        className="form-control" 
-                        id="email" 
-                        placeholder="e.g. janedoe@gmail.com" 
-                        onChange={this.props.handleEmailChange}></input>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="phone">Phone</label>
+                        <label htmlFor={this.props.experience.id + "-employer"}>Employer</label>
                         <input type="text" 
                         className="form-control" 
-                        id="phone" 
-                        placeholder="e.g. (111) 111 1111" 
-                        onChange={this.props.handlePhoneChange}></input>
+                        id={this.props.experience.id + "-employer"}
+                        placeholder="e.g. Mozilla Corporation" 
+                        onChange={this.props.handleEmployerChange}></input>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="address">Address</label>
+                        <label htmlFor={this.props.experience.id + "-start"}>Start Date</label>
                         <input type="text" 
                         className="form-control" 
-                        id="address" 
-                        placeholder="e.g. 111 Fairfax Ln. Beverly Hills, CA 90210" 
-                        onChange={this.props.handleAddressChange}></input>
+                        id={this.props.experience.id + "-start"}
+                        placeholder="e.g. May 2015" 
+                        onChange={this.props.handleExpStartChange}></input>
                     </div>
+                    <div className="form-group">
+                        <label htmlFor={this.props.experience.id + "-end"}>End Date</label>
+                        <input type="text" 
+                        className="form-control" 
+                        id={this.props.experience.id + "-end"}
+                        placeholder="e.g. Jan 2019" 
+                        onChange={this.props.handleExpEndChange}></input>
+                    </div>
+                    <Bullets />
                     <button type="submit" 
                     id={this.props.experience.id} 
-                    className="btn btn-primary btn-top-margin" 
+                    className="btn btn-primary btn-top-margin"
                     onClick={this.props.handleExperienceSubmit}>Submit</button>
                 </form>
+                <button className="btn btn-primary btn-top-margin" onClick={this.props.handleDeleteExperience}>Delete Experience</button>
+                </div>
+                
             )
         } else {
             return (
