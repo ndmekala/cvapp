@@ -68,6 +68,7 @@ class Experience extends Component {
                 <div>
                     <h2>{this.props.experience.savedInfo.position}</h2>
                     <p className="para-nospacing">{this.props.experience.savedInfo.employer}</p>
+                    <p>{this.props.experience.savedInfo.location}</p>
                     <p className="para-nospacing">{this.props.experience.savedInfo.start}</p>
                     <p>{this.props.experience.savedInfo.end}</p>
                     <button id={this.props.experience.id} 
