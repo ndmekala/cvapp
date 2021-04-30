@@ -50,7 +50,8 @@ class Experience extends Component {
                     className="btn btn-primary btn-top-margin"
                     onClick={this.props.handleExperienceSubmit}>Submit</button>
                 </form>
-                <button className="btn btn-primary btn-top-margin" onClick={this.props.handleDeleteExperience}>Delete Experience</button>
+                <button className={this.props.experience.id + " btn btn-primary btn-top-margin"} 
+                onClick={this.props.handleDeleteExperience}>Delete Experience</button>
                 </div>
                 
             )

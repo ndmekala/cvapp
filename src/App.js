@@ -27,36 +27,8 @@ class App extends Component {
           address: '',
         }
       },
-      // No. isInFormMode should just be part of each one. edit indivudally.
-      experience: [
-        {
-          id: uniqid(),
-          isInFormMode: true,
-          liveInfo: {
-            position: '',
-            employer: '',
-            start: '',
-            end: '',
-            bullets: [],
-          },
-          savedInfo: {
-            position: '',
-            employer: '',
-            start: '',
-            end: '',
-            bullets: [],
-          }
-        },
-      ],
-      experience2: {
-
-        isInFormMode: true,
-        experienceArray: [
-          {
-
-          },
-        ],
-      },
+      experience: [this.returnNewExperience()],
+      // no
       education: {
         isInFormMode: true,
         educationArray: [
@@ -66,7 +38,6 @@ class App extends Component {
         ],
       },
     }
-
     this.setContactFormMode = this.setContactFormMode.bind(this);
     this.handleContactSubmit = this.handleContactSubmit.bind(this);
     this.handleContactEdit = this.handleContactEdit.bind(this);
@@ -78,10 +49,30 @@ class App extends Component {
     this.handleExperienceSubmit = this.handleExperienceSubmit.bind(this);
     this.handleExperienceEdit = this.handleExperienceEdit.bind(this);
     this.handleAddExperience = this.handleAddExperience.bind(this);
+    this.handleDeleteExperience = this.handleDeleteExperience.bind(this);
     this.setEducationFormMode = this.setEducationFormMode.bind(this);
     this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
     this.handleEducationEdit = this.handleEducationEdit.bind(this);
-
+  }
+  returnNewExperience() {
+    return {
+        id: uniqid(),
+        isInFormMode: true,
+        liveInfo: {
+          position: '',
+          employer: '',
+          start: '',
+          end: '',
+          bullets: [],
+        },
+        savedInfo: {
+          position: '',
+          employer: '',
+          start: '',
+          end: '',
+          bullets: [],
+        }
+    }
   }
   idToIndex(array, id){
     return array.findIndex(element => element.id === id);
@@ -184,26 +175,21 @@ class App extends Component {
     this.setState(prevState => ({
       experience: [
         ...prevState.experience,
-        {
-          id: uniqid(),
-          isInFormMode: true,
-          liveInfo: {
-            position: '',
-            employer: '',
-            start: '',
-            end: '',
-            bullets: [],
-          },
-          savedInfo: {
-            position: '',
-            employer: '',
-            start: '',
-            end: '',
-            bullets: [],
-          }
-        }
+        this.returnNewExperience()
       ]
     }))
+  }
+  handleDeleteExperience(e) {
+    if (this.state.experience.length > 1) {
+      const id = e.target.classList[0]
+      const index = this.idToIndex(this.state.experience, id)
+      this.setState(prevState => ({
+        experience: [
+          ...prevState.experience.slice(0,index),
+          ...prevState.experience.slice(index+1)
+        ]
+    }))
+    }
   }
 
   setEducationFormMode() {
@@ -237,7 +223,7 @@ class App extends Component {
               handleEmployerChange={this.handleEmployerChange} // BUILD THIS
               handleExpStartChange={this.handleExpStartChange} // BUILD THIS
               handleExpEndChange={this.handleExpEndChange} // BUILD THIS
-              handleDeleteExperience={this.handleDeleteExperience} // BUILD THIS
+              handleDeleteExperience={this.handleDeleteExperience}
               handleExperienceSubmit={this.handleExperienceSubmit} 
               handleExperienceEdit={this.handleExperienceEdit} />
             ))}
