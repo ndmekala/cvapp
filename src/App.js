@@ -28,15 +28,7 @@ class App extends Component {
         }
       },
       experience: [this.returnNewExperience()],
-      // no (make a function for education like returnNewExperience and format like above ^^)
-      education: {
-        isInFormMode: true,
-        educationArray: [
-          {
-
-          },
-        ],
-      },
+      education: [this.returnNewEducation()],
     }
     this.setContactFormMode = this.setContactFormMode.bind(this);
     this.handleContactSubmit = this.handleContactSubmit.bind(this);
@@ -57,9 +49,16 @@ class App extends Component {
     this.handleExpEndChange = this.handleExpEndChange.bind(this);
     this.handleExpLocationChange = this.handleExpLocationChange.bind(this);
 
-    this.setEducationFormMode = this.setEducationFormMode.bind(this);
     this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
     this.handleEducationEdit = this.handleEducationEdit.bind(this);
+    this.handleAddEducation = this.handleAddEducation.bind(this);
+    this.handleDeleteEducation = this.handleDeleteEducation.bind(this);
+    this.handleDegreeChange = this.handleDegreeChange.bind(this);
+    this.handleInstitutionChange = this.handleInstitutionChange.bind(this);
+    this.handleEdStartChange = this.handleEdStartChange.bind(this);
+    this.handleEdEndChange = this.handleEdEndChange.bind(this);
+    this.handleEdLocationChange = this.handleEdLocationChange.bind(this);
+    this.handleGpaChange = this.handleGpaChange.bind(this)
   }
   returnNewExperience() {
     return {
@@ -88,7 +87,20 @@ class App extends Component {
       id: uniqid(),
       isInFormMode: true,
       liveInfo: {
-        
+        degree: '',
+        institution: '',
+        start: '',
+        end: '',
+        location: '',
+        gpa: ''
+      },
+      savedInfo: {
+        degree: '',
+        institution: '',
+        start: '',
+        end: '',
+        location: '',
+        gpa: ''
       }
     }
   }
@@ -172,6 +184,9 @@ class App extends Component {
     }), () => console.table(this.state))
   }
   
+
+  // Experience EDIT, ADD, DELETE, SUBMIT
+  // CONSOLIDATE THE FOLLOWING 2!
   setExperienceFormMode(id) {
     const index = this.idToIndex(this.state.experience, id)
     this.setState(prevState => ({
@@ -233,6 +248,8 @@ class App extends Component {
     }))
     }
   }
+
+  // EXPERIENCE FORM HANDLERS
   handlePositionChange(e) {
     const id = e.target.id.replace('-position','')
     const index = this.idToIndex(this.state.experience, id)
@@ -303,17 +320,155 @@ class App extends Component {
       ]
     }), () => console.log(this.state.experience[index]))
   }
-
-  setEducationFormMode() {
-    this.state.education.isInFormMode ? this.setState({education: {isInFormMode: 0}}) : this.setState({education: {isInFormMode: 1}})
-  }
-  handleEducationEdit() {
-    this.setEducationFormMode();
+  // EDUCATION EDIT, ADD, DELETE, SUBMIT
+  handleEducationEdit(e) {
+    const id = e.target.id
+    const index = this.idToIndex(this.state.education, id)
+    this.setState(prevState => ({
+      education: [
+        ...prevState.education.slice(0, index),
+        Object.assign({}, this.state.education[index], {isInFormMode: !this.state.education[index].isInFormMode}),
+        ...prevState.experience.slice(index+1)
+      ]
+    }))
   }
   handleEducationSubmit(e) {
     e.preventDefault();
-    this.setEducationFormMode();
+    const index = this.idToIndex(this.state.education, e.target.id)
+    this.setState(prevState => ({
+      education: [
+        ...prevState.education.slice(0, index),
+        {
+          id: prevState.education[index].id,
+          isInFormMode: !prevState.education[index].isInFormMode,
+          liveInfo: {
+            degree: '',
+            institution: '',
+            start: '',
+            end: '',
+            location: '',
+            gpa: '',
+          },
+          savedInfo: {
+            degree: prevState.education[index].liveInfo.degree ? prevState.education[index].liveInfo.degree : prevState.education[index].savedInfo.degree,
+            institution: prevState.education[index].liveInfo.institution ? prevState.education[index].liveInfo.institution : prevState.education[index].savedInfo.institution,
+            start: prevState.education[index].liveInfo.start ? prevState.education[index].liveInfo.start : prevState.education[index].savedInfo.start,
+            end: prevState.education[index].liveInfo.end ? prevState.education[index].liveInfo.end : prevState.education[index].savedInfo.end,
+            location: prevState.education[index].liveInfo.location ? prevState.education[index].liveInfo.location : prevState.education[index].savedInfo.location,
+            gpa: prevState.education[index].liveInfo.gpa ? prevState.education[index].liveInfo.gpa : prevState.education[index].savedInfo.gpa,
+          }
+        },
+        ...prevState.education.slice(index+1)
+      ]
+    }), () => console.log(this.state.education))
   }
+  handleAddEducation() {
+    this.setState(prevState => ({
+      education: [
+        ...prevState.education,
+        this.returnNewEducation()
+      ]
+    }))
+  }
+  handleDeleteEducation(e) {
+    if (this.state.education.length > 1) {
+      const id = e.target.classList[0]
+      const index = this.idToIndex(this.state.education, id)
+      this.setState(prevState => ({
+        education: [
+          ...prevState.education.slice(0, index),
+          ...prevState.education.slice(index + 1)
+        ]
+      }))
+    }
+  }
+  // EDUCATION FORM HANDLERS
+  handleDegreeChange(e) {
+    const id = e.target.id.replace('-degree', '')
+    const index = this.idToIndex(this.state.education, id)
+    this.setState(prevState => ({
+      education: [
+        ...prevState.education.slice(0, index),
+        Object.assign({}, this.state.education[index], {liveInfo: {
+          ...prevState.education[index].liveInfo,
+          degree: e.target.value,
+        }}),
+        ...prevState.education.slice(index + 1)
+      ]
+    }), () => console.log(this.state.education[index]))
+  } 
+  handleInstitutionChange(e) { 
+    const id = e.target.id.replace('-institution', '')
+    const index = this.idToIndex(this.state.education, id)
+    this.setState(prevState => ({
+      education: [
+        ...prevState.education.slice(0, index),
+        Object.assign({}, this.state.education[index], {liveInfo: {
+          ...prevState.education[index].liveInfo,
+          institution: e.target.value,
+        }}),
+        ...prevState.education.slice(index + 1)
+      ]
+    }), () => console.log(this.state.education[index]))
+  } 
+  handleEdStartChange(e) {
+    const id = e.target.id.replace('-start', '')
+    const index = this.idToIndex(this.state.education, id)
+    this.setState(prevState => ({
+      education: [
+        ...prevState.education.slice(0, index),
+        Object.assign({}, this.state.education[index], {liveInfo: {
+          ...prevState.education[index].liveInfo,
+          start: e.target.value,
+        }}),
+        ...prevState.education.slice(index + 1)
+      ]
+    }), () => console.log(this.state.education[index]))
+  } 
+  handleEdEndChange(e) {
+    const id = e.target.id.replace('-end', '')
+    const index = this.idToIndex(this.state.education, id)
+    this.setState(prevState => ({
+      education: [
+        ...prevState.education.slice(0, index),
+        Object.assign({}, this.state.education[index], {liveInfo: {
+          ...prevState.education[index].liveInfo,
+          end: e.target.value,
+        }}),
+        ...prevState.education.slice(index + 1)
+      ]
+    }), () => console.log(this.state.education[index]))
+  } 
+  handleEdLocationChange(e) {
+    const id = e.target.id.replace('-location', '')
+    const index = this.idToIndex(this.state.education, id)
+    this.setState(prevState => ({
+      education: [
+        ...prevState.education.slice(0, index),
+        Object.assign({}, this.state.education[index], {liveInfo: {
+          ...prevState.education[index].liveInfo,
+          location: e.target.value,
+        }}),
+        ...prevState.education.slice(index + 1)
+      ]
+    }), () => console.log(this.state.education[index]))
+  } 
+  handleGpaChange(e) {
+    const id = e.target.id.replace('-gpa', '')
+    const index = this.idToIndex(this.state.education, id)
+    this.setState(prevState => ({
+      education: [
+        ...prevState.education.slice(0, index),
+        Object.assign({}, this.state.education[index], {liveInfo: {
+          ...prevState.education[index].liveInfo,
+          gpa: e.target.value,
+        }}),
+        ...prevState.education.slice(index + 1)
+      ]
+    }), () => console.log(this.state.education[index]))
+  } 
+  
+
 
   render() {
     return (
@@ -340,11 +495,22 @@ class App extends Component {
               handleExperienceSubmit={this.handleExperienceSubmit} 
               handleExperienceEdit={this.handleExperienceEdit} />
             ))}
-            <button className="btn btn-primary btn-top-margin" onClick={this.handleAddExperience}>Add Experience</button>
+            <button className="btn btn-primary btn-top-margin" onClick={this.handleAddExperience}>Add</button>
             <h1 className="text-muted">Education</h1>
-            <Education isInFormMode={this.state.education.isInFormMode} 
-            handleEducationSubmit={this.handleEducationSubmit} 
-            handleEducationEdit={this.handleEducationEdit}/>
+            {this.state.education.map(ed => (
+              <Education education={ed}
+              handleDegreeChange={this.handleDegreeChange} 
+              handleInstitutionChange={this.handleInstitutionChange} 
+              handleEdStartChange={this.handleEdStartChange} 
+              handleEdEndChange={this.handleEdEndChange} 
+              handleEdLocationChange={this.handleEdLocationChange} 
+              handleGpaChange={this.handleGpaChange} 
+              handleDeleteEducation={this.handleDeleteEducation} 
+              handleEducationSubmit={this.handleEducationSubmit} 
+              handleEducationEdit={this.handleEducationEdit}/> 
+            ))}
+            <button className="btn btn-primary btn-top-margin" onClick={this.handleAddEducation}>Add</button>
+
           </div>
         </main>
         <Footer />
