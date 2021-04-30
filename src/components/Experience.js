@@ -29,6 +29,14 @@ class Experience extends Component {
                         onChange={this.props.handleEmployerChange}></input>
                     </div>
                     <div className="form-group">
+                        <label htmlFor={this.props.experience.id + "-location"}>Location</label>
+                        <input type="text" 
+                        className="form-control" 
+                        id={this.props.experience.id + "-location"}
+                        placeholder={this.props.experience.savedInfo.location ? this.props.experience.savedInfo.location : "e.g. San Francisco, CA"}
+                        onChange={this.props.handleExpLocationChange}></input>
+                    </div>
+                    <div className="form-group">
                         <label htmlFor={this.props.experience.id + "-start"}>Start Date</label>
                         <input type="text" 
                         className="form-control" 
