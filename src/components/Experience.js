@@ -17,7 +17,7 @@ class Experience extends Component {
                         <input type="text" 
                         className="form-control" 
                         id={this.props.experience.id + "-position"}
-                        placeholder="e.g. Junior Developer" 
+                        placeholder={this.props.experience.savedInfo.position ? this.props.experience.savedInfo.position : "e.g. Junior Developer" }
                         onChange={this.props.handlePositionChange}></input>
                     </div>
                     <div className="form-group">
@@ -25,7 +25,7 @@ class Experience extends Component {
                         <input type="text" 
                         className="form-control" 
                         id={this.props.experience.id + "-employer"}
-                        placeholder="e.g. Mozilla Corporation" 
+                        placeholder={this.props.experience.savedInfo.employer ? this.props.experience.savedInfo.employer : "e.g. Mozilla Corporation"}
                         onChange={this.props.handleEmployerChange}></input>
                     </div>
                     <div className="form-group">
@@ -33,7 +33,7 @@ class Experience extends Component {
                         <input type="text" 
                         className="form-control" 
                         id={this.props.experience.id + "-start"}
-                        placeholder="e.g. May 2015" 
+                        placeholder={this.props.experience.savedInfo.start ? this.props.experience.savedInfo.start : "e.g. May 2015"}
                         onChange={this.props.handleExpStartChange}></input>
                     </div>
                     <div className="form-group">
@@ -41,7 +41,7 @@ class Experience extends Component {
                         <input type="text" 
                         className="form-control" 
                         id={this.props.experience.id + "-end"}
-                        placeholder="e.g. Jan 2019" 
+                        placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
                         onChange={this.props.handleExpEndChange}></input>
                     </div>
                     <Bullets />
@@ -57,9 +57,16 @@ class Experience extends Component {
             )
         } else {
             return (
-                <button id={this.props.experience.id} 
-                className="btn btn-primary" 
-                onClick={this.props.handleExperienceEdit}>Edit</button>
+                <div>
+                    <h2>{this.props.experience.savedInfo.position}</h2>
+                    <p className="para-nospacing">{this.props.experience.savedInfo.employer}</p>
+                    <p className="para-nospacing">{this.props.experience.savedInfo.start}</p>
+                    <p>{this.props.experience.savedInfo.end}</p>
+                    <button id={this.props.experience.id} 
+                    className="btn btn-primary" 
+                    onClick={this.props.handleExperienceEdit}>Edit</button>
+                </div>
+                
             )
         }
         

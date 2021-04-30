@@ -51,6 +51,11 @@ class App extends Component {
     this.handleExperienceEdit = this.handleExperienceEdit.bind(this);
     this.handleAddExperience = this.handleAddExperience.bind(this);
     this.handleDeleteExperience = this.handleDeleteExperience.bind(this);
+    this.handlePositionChange = this.handlePositionChange.bind(this);
+    this.handleEmployerChange = this.handleEmployerChange.bind(this);
+    this.handleExpStartChange = this.handleExpStartChange.bind(this);
+    this.handleExpEndChange = this.handleExpEndChange.bind(this);
+
     this.setEducationFormMode = this.setEducationFormMode.bind(this);
     this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
     this.handleEducationEdit = this.handleEducationEdit.bind(this);
@@ -170,7 +175,29 @@ class App extends Component {
   }
   handleExperienceSubmit(e) {
     e.preventDefault();
-    this.setExperienceFormMode(e.target.id);
+    const index = this.idToIndex(this.state.experience, e.target.id)
+    this.setState(prevState => ({
+      experience: [
+        ...prevState.experience.slice(0, index),
+        {
+          id: prevState.experience[index].id,
+          isInFormMode: !prevState.experience[index].isInFormMode,
+          liveInfo: {
+            position: '',
+            employer: '',
+            start: '',
+            end: '',
+          },
+          savedInfo: {
+            position: prevState.experience[index].liveInfo.position ? prevState.experience[index].liveInfo.position : prevState.experience[index].savedInfo.position,
+            employer: prevState.experience[index].liveInfo.employer ? prevState.experience[index].liveInfo.employer : prevState.experience[index].savedInfo.employer,
+            start: prevState.experience[index].liveInfo.start ? prevState.experience[index].liveInfo.start : prevState.experience[index].savedInfo.start,
+            end: prevState.experience[index].liveInfo.end ? prevState.experience[index].liveInfo.end : prevState.experience[index].savedInfo.end,
+          }
+        },
+        ...prevState.experience.slice(index+1)
+      ]
+    }), () => console.log(this.state.experience))
   }
   handleAddExperience() {
     this.setState(prevState => ({
@@ -193,25 +220,60 @@ class App extends Component {
     }
   }
   handlePositionChange(e) {
-    console.log(e.target.id)
-    // const id = e.target.
-    // const index = this.idToIndex(this.state.experience, id)
-    // this.setState(prevState => ({
-    //   experience: [
-    //     ...prevState.experience.slice(0,index)
-
-    //   ]
-    // }))
-
+    const id = e.target.id.replace('-position','')
+    const index = this.idToIndex(this.state.experience, id)
+    this.setState(prevState => ({
+      experience: [
+        ...prevState.experience.slice(0,index),
+        Object.assign({}, this.state.experience[index], {liveInfo: {
+          ...prevState.experience[index].liveInfo,
+          position: e.target.value,
+        }}),
+        ...prevState.experience.slice(index+1)
+      ]
+    }), () => console.log(this.state.experience[index]))
   }
   handleEmployerChange(e) {
-    
+    const id = e.target.id.replace('-employer','')
+    const index = this.idToIndex(this.state.experience, id)
+    this.setState(prevState => ({
+      experience: [
+        ...prevState.experience.slice(0,index),
+        Object.assign({}, this.state.experience[index], {liveInfo: {
+          ...prevState.experience[index].liveInfo,
+          employer: e.target.value,
+        }}),
+        ...prevState.experience.slice(index+1)
+      ]
+    }), () => console.log(this.state.experience[index]))
   }
   handleExpStartChange(e) {
-    
+    const id = e.target.id.replace('-start','')
+    const index = this.idToIndex(this.state.experience, id)
+    this.setState(prevState => ({
+      experience: [
+        ...prevState.experience.slice(0,index),
+        Object.assign({}, this.state.experience[index], {liveInfo: {
+          ...prevState.experience[index].liveInfo,
+          start: e.target.value,
+        }}),
+        ...prevState.experience.slice(index+1)
+      ]
+    }), () => console.log(this.state.experience[index]))
   }
   handleExpEndChange(e) {
-    
+    const id = e.target.id.replace('-end','')
+    const index = this.idToIndex(this.state.experience, id)
+    this.setState(prevState => ({
+      experience: [
+        ...prevState.experience.slice(0,index),
+        Object.assign({}, this.state.experience[index], {liveInfo: {
+          ...prevState.experience[index].liveInfo,
+          end: e.target.value,
+        }}),
+        ...prevState.experience.slice(index+1)
+      ]
+    }), () => console.log(this.state.experience[index]))
   }
 
   setEducationFormMode() {
