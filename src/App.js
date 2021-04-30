@@ -28,7 +28,7 @@ class App extends Component {
         }
       },
       experience: [this.returnNewExperience()],
-      // no
+      // no (make a function for education like returnNewExperience and format like above ^^)
       education: {
         isInFormMode: true,
         educationArray: [
@@ -45,6 +45,7 @@ class App extends Component {
     this.handleEmailChange = this.handleEmailChange.bind(this)
     this.handlePhoneChange = this.handlePhoneChange.bind(this)
     this.handleAddressChange = this.handleAddressChange.bind(this)
+
     this.setExperienceFormMode = this.setExperienceFormMode.bind(this);
     this.handleExperienceSubmit = this.handleExperienceSubmit.bind(this);
     this.handleExperienceEdit = this.handleExperienceEdit.bind(this);
@@ -191,6 +192,27 @@ class App extends Component {
     }))
     }
   }
+  handlePositionChange(e) {
+    console.log(e.target.id)
+    // const id = e.target.
+    // const index = this.idToIndex(this.state.experience, id)
+    // this.setState(prevState => ({
+    //   experience: [
+    //     ...prevState.experience.slice(0,index)
+
+    //   ]
+    // }))
+
+  }
+  handleEmployerChange(e) {
+    
+  }
+  handleExpStartChange(e) {
+    
+  }
+  handleExpEndChange(e) {
+    
+  }
 
   setEducationFormMode() {
     this.state.education.isInFormMode ? this.setState({education: {isInFormMode: 0}}) : this.setState({education: {isInFormMode: 1}})
@@ -219,10 +241,10 @@ class App extends Component {
             <h1 className="text-muted">Experience</h1>
             {this.state.experience.map(exp => (
               <Experience experience={exp}
-              handlePositionChange={this.handlePositionChange} // BUILD THIS
-              handleEmployerChange={this.handleEmployerChange} // BUILD THIS
-              handleExpStartChange={this.handleExpStartChange} // BUILD THIS
-              handleExpEndChange={this.handleExpEndChange} // BUILD THIS
+              handlePositionChange={this.handlePositionChange} 
+              handleEmployerChange={this.handleEmployerChange} 
+              handleExpStartChange={this.handleExpStartChange} 
+              handleExpEndChange={this.handleExpEndChange} 
               handleDeleteExperience={this.handleDeleteExperience}
               handleExperienceSubmit={this.handleExperienceSubmit} 
               handleExperienceEdit={this.handleExperienceEdit} />
