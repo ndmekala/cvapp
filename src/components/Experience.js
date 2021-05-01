@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Bullets from './Bullets'
 
 class Experience extends Component {
     constructor(props) {
@@ -52,7 +51,59 @@ class Experience extends Component {
                         placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
                         onChange={this.props.handleExpEndChange}></input>
                     </div>
-                    <Bullets />
+
+
+
+                    {/* BULLETS */}
+                    <div className="form-group">
+                        <label htmlFor={this.props.experience.id + "-bullet-0"}>Bullet Point Description</label>
+                        <input type="text" 
+                        className="form-control" 
+                        id={this.props.experience.id + "-bullet-0"}
+                        placeholder={this.props.experience.savedInfo.bullets[0] ? this.props.experience.savedInfo.bullets[0] : "e.g. Optimized application load times by 4%."}
+                        onChange={this.props.handleBulletChange}></input>
+                    </div>
+{/*                     
+                    <div className="form-group">
+                        <label htmlFor={this.props.experience.id + "-end"}>End Date</label>
+                        <input type="text" 
+                        className="form-control" 
+                        id={this.props.experience.id + "-end"}
+                        placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
+                        onChange={this.props.handleExpEndChange}></input>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor={this.props.experience.id + "-end"}>End Date</label>
+                        <input type="text" 
+                        className="form-control" 
+                        id={this.props.experience.id + "-end"}
+                        placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
+                        onChange={this.props.handleExpEndChange}></input>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor={this.props.experience.id + "-end"}>End Date</label>
+                        <input type="text" 
+                        className="form-control" 
+                        id={this.props.experience.id + "-end"}
+                        placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
+                        onChange={this.props.handleExpEndChange}></input>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor={this.props.experience.id + "-end"}>End Date</label>
+                        <input type="text" 
+                        className="form-control" 
+                        id={this.props.experience.id + "-end"}
+                        placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
+                        onChange={this.props.handleExpEndChange}></input>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor={this.props.experience.id + "-end"}>End Date</label>
+                        <input type="text" 
+                        className="form-control" 
+                        id={this.props.experience.id + "-end"}
+                        placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
+                        onChange={this.props.handleExpEndChange}></input>
+                    </div> */}
                     <button type="submit" 
                     id={this.props.experience.id} 
                     className="btn btn-primary btn-top-margin"

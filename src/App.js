@@ -70,7 +70,7 @@ class App extends Component {
           start: '',
           end: '',
           location: '',
-          bullets: [],
+          bullets: [ '', '', '', '', '', ''],
         },
         savedInfo: {
           position: '',
@@ -78,7 +78,7 @@ class App extends Component {
           start: '',
           end: '',
           location: '',
-          bullets: [],
+          bullets: [ '', '', '', '', '', ''],
         }
     }
   }
@@ -215,6 +215,7 @@ class App extends Component {
             start: '',
             end: '',
             location: '',
+            bullets: [ '', '', '', '', '', ''],
           },
           savedInfo: {
             position: prevState.experience[index].liveInfo.position ? prevState.experience[index].liveInfo.position : prevState.experience[index].savedInfo.position,
@@ -222,6 +223,14 @@ class App extends Component {
             start: prevState.experience[index].liveInfo.start ? prevState.experience[index].liveInfo.start : prevState.experience[index].savedInfo.start,
             end: prevState.experience[index].liveInfo.end ? prevState.experience[index].liveInfo.end : prevState.experience[index].savedInfo.end,
             location: prevState.experience[index].liveInfo.location ? prevState.experience[index].liveInfo.location : prevState.experience[index].savedInfo.location,
+            bullets: [
+              prevState.experience[index].liveInfo.bullets[0] ? prevState.experience[index].liveInfo.bullets[0] : prevState.experience[index].savedInfo.bullets[0],
+              prevState.experience[index].liveInfo.bullets[1] ? prevState.experience[index].liveInfo.bullets[1] : prevState.experience[index].savedInfo.bullets[1],
+              prevState.experience[index].liveInfo.bullets[2] ? prevState.experience[index].liveInfo.bullets[2] : prevState.experience[index].savedInfo.bullets[2],
+              prevState.experience[index].liveInfo.bullets[3] ? prevState.experience[index].liveInfo.bullets[3] : prevState.experience[index].savedInfo.bullets[3],
+              prevState.experience[index].liveInfo.bullets[4] ? prevState.experience[index].liveInfo.bullets[4] : prevState.experience[index].savedInfo.bullets[4],
+              prevState.experience[index].liveInfo.bullets[5] ? prevState.experience[index].liveInfo.bullets[5] : prevState.experience[index].savedInfo.bullets[5],
+            ]
           }
         },
         ...prevState.experience.slice(index+1)
@@ -320,6 +329,22 @@ class App extends Component {
       ]
     }), () => console.log(this.state.experience[index]))
   }
+  // format of key = (uniqid)-bullet-0
+  // prop as key, make id as well…?
+  handleBulletChange(e) {
+    const idStr = e.target.id;
+    const firstDash = idStr.indexOf('-');
+    const expArrId = idStr.slice(0,firstDash);
+    console.log(expArrId)
+    const bulletArrInd = idStr.slice(-1);
+    const expArrInd = this.idToIndex(this.state.experience, expArrId);
+    let stateCopy = Object.assign({}, this.state)
+    // IDK IF THIS WORKS YET!
+    // THIS IS BROKEN!!
+    stateCopy.experience[expArrInd].liveInfo.bullets[bulletArrInd] = e.target.value
+    this.setState(stateCopy)
+  }
+
   // EDUCATION EDIT, ADD, DELETE, SUBMIT
   handleEducationEdit(e) {
     const id = e.target.id
@@ -466,7 +491,7 @@ class App extends Component {
         ...prevState.education.slice(index + 1)
       ]
     }), () => console.log(this.state.education[index]))
-  } 
+  }
   
 
 
@@ -491,6 +516,7 @@ class App extends Component {
               handleExpStartChange={this.handleExpStartChange} 
               handleExpEndChange={this.handleExpEndChange} 
               handleExpLocationChange={this.handleExpLocationChange} 
+              handleBulletChange={this.handleBulletChange}
               handleDeleteExperience={this.handleDeleteExperience}
               handleExperienceSubmit={this.handleExperienceSubmit} 
               handleExperienceEdit={this.handleExperienceEdit} />
