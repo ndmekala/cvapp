@@ -30,6 +30,8 @@ class App extends Component {
       experience: [this.returnNewExperience()],
       education: [this.returnNewEducation()],
     }
+    this.idToIndex = this.idToIndex.bind(this);
+    
     this.setContactFormMode = this.setContactFormMode.bind(this);
     this.handleContactSubmit = this.handleContactSubmit.bind(this);
     this.handleContactEdit = this.handleContactEdit.bind(this);
@@ -48,6 +50,7 @@ class App extends Component {
     this.handleExpStartChange = this.handleExpStartChange.bind(this);
     this.handleExpEndChange = this.handleExpEndChange.bind(this);
     this.handleExpLocationChange = this.handleExpLocationChange.bind(this);
+    this.handleBulletChange = this.handleBulletChange.bind(this);
 
     this.handleEducationSubmit = this.handleEducationSubmit.bind(this);
     this.handleEducationEdit = this.handleEducationEdit.bind(this);
@@ -317,6 +320,7 @@ class App extends Component {
   }
   handleExpLocationChange(e) {
     const id = e.target.id.replace('-location','')
+    console.log(this.state)
     const index = this.idToIndex(this.state.experience, id)
     this.setState(prevState => ({
       experience: [
@@ -335,14 +339,11 @@ class App extends Component {
     const idStr = e.target.id;
     const firstDash = idStr.indexOf('-');
     const expArrId = idStr.slice(0,firstDash);
-    console.log(expArrId)
     const bulletArrInd = idStr.slice(-1);
     const expArrInd = this.idToIndex(this.state.experience, expArrId);
     let stateCopy = Object.assign({}, this.state)
-    // IDK IF THIS WORKS YET!
-    // THIS IS BROKEN!!
     stateCopy.experience[expArrInd].liveInfo.bullets[bulletArrInd] = e.target.value
-    this.setState(stateCopy)
+    this.setState(stateCopy, () => console.log(this.state))
   }
 
   // EDUCATION EDIT, ADD, DELETE, SUBMIT

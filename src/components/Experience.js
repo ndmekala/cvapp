@@ -52,58 +52,55 @@ class Experience extends Component {
                         onChange={this.props.handleExpEndChange}></input>
                     </div>
 
-
-
                     {/* BULLETS */}
                     <div className="form-group">
                         <label htmlFor={this.props.experience.id + "-bullet-0"}>Bullet Point Description</label>
                         <input type="text" 
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-0"}
-                        placeholder={this.props.experience.savedInfo.bullets[0] ? this.props.experience.savedInfo.bullets[0] : "e.g. Optimized application load times by 4%."}
+                        placeholder={this.props.experience.savedInfo.bullets[0] ? this.props.experience.savedInfo.bullets[0] : "e.g. Increased application load times by 15%."}
                         onChange={this.props.handleBulletChange}></input>
                     </div>
-{/*                     
                     <div className="form-group">
-                        <label htmlFor={this.props.experience.id + "-end"}>End Date</label>
+                        <label htmlFor={this.props.experience.id + "-bullet-1"}>Bullet Point Description</label>
                         <input type="text" 
                         className="form-control" 
-                        id={this.props.experience.id + "-end"}
-                        placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
-                        onChange={this.props.handleExpEndChange}></input>
+                        id={this.props.experience.id + "-bullet-1"}
+                        placeholder={this.props.experience.savedInfo.bullets[1] ? this.props.experience.savedInfo.bullets[1] : "e.g. Increased application load times by 15%."}
+                        onChange={this.props.handleBulletChange}></input>
                     </div>
                     <div className="form-group">
-                        <label htmlFor={this.props.experience.id + "-end"}>End Date</label>
+                        <label htmlFor={this.props.experience.id + "-bullet-2"}>Bullet Point Description</label>
                         <input type="text" 
                         className="form-control" 
-                        id={this.props.experience.id + "-end"}
-                        placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
-                        onChange={this.props.handleExpEndChange}></input>
+                        id={this.props.experience.id + "-bullet-2"}
+                        placeholder={this.props.experience.savedInfo.bullets[2] ? this.props.experience.savedInfo.bullets[2] : "e.g. Increased application load times by 15%."}
+                        onChange={this.props.handleBulletChange}></input>
                     </div>
                     <div className="form-group">
-                        <label htmlFor={this.props.experience.id + "-end"}>End Date</label>
+                        <label htmlFor={this.props.experience.id + "-bullet-3"}>Bullet Point Description</label>
                         <input type="text" 
                         className="form-control" 
-                        id={this.props.experience.id + "-end"}
-                        placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
-                        onChange={this.props.handleExpEndChange}></input>
+                        id={this.props.experience.id + "-bullet-3"}
+                        placeholder={this.props.experience.savedInfo.bullets[3] ? this.props.experience.savedInfo.bullets[3] : "e.g. Increased application load times by 15%."}
+                        onChange={this.props.handleBulletChange}></input>
                     </div>
                     <div className="form-group">
-                        <label htmlFor={this.props.experience.id + "-end"}>End Date</label>
+                        <label htmlFor={this.props.experience.id + "-bullet-4"}>Bullet Point Description</label>
                         <input type="text" 
                         className="form-control" 
-                        id={this.props.experience.id + "-end"}
-                        placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
-                        onChange={this.props.handleExpEndChange}></input>
+                        id={this.props.experience.id + "-bullet-4"}
+                        placeholder={this.props.experience.savedInfo.bullets[4] ? this.props.experience.savedInfo.bullets[4] : "e.g. Increased application load times by 15%."}
+                        onChange={this.props.handleBulletChange}></input>
                     </div>
                     <div className="form-group">
-                        <label htmlFor={this.props.experience.id + "-end"}>End Date</label>
+                        <label htmlFor={this.props.experience.id + "-bullet-5"}>Bullet Point Description</label>
                         <input type="text" 
                         className="form-control" 
-                        id={this.props.experience.id + "-end"}
-                        placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
-                        onChange={this.props.handleExpEndChange}></input>
-                    </div> */}
+                        id={this.props.experience.id + "-bullet-5"}
+                        placeholder={this.props.experience.savedInfo.bullets[5] ? this.props.experience.savedInfo.bullets[5] : "e.g. Increased application load times by 15%."}
+                        onChange={this.props.handleBulletChange}></input>
+                    </div>
                     <button type="submit" 
                     id={this.props.experience.id} 
                     className="btn btn-primary btn-top-margin"
@@ -122,6 +119,9 @@ class Experience extends Component {
                     <p>{this.props.experience.savedInfo.location}</p>
                     <p className="para-nospacing">{this.props.experience.savedInfo.start}</p>
                     <p>{this.props.experience.savedInfo.end}</p>
+                    <ul>
+                        {this.props.experience.savedInfo.bullets.filter(bullet => bullet).map(bullet => <li>{bullet}</li>)}
+                    </ul>
                     <button id={this.props.experience.id} 
                     className="btn btn-primary" 
                     onClick={this.props.handleExperienceEdit}>Edit</button> 
