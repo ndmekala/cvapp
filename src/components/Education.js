@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 class Education extends Component {
     constructor(props) {
         super (props)
     }
 
-
-// degree: '',
-// institution: '',
-// start: '',
-// end: '',
-// location: '',
-// gpa: ''
-
     render() {
         
         if (this.props.education.isInFormMode) {
             return (
-                <div>
+                <div className="bottom-border">
                     <form>
-                        <div className="form=group">
+                        <div className="form-group">
                             <label htmlFor={this.props.education.id + "-degree"}>Degree</label>
                             <input type="text" 
                             className="form-control" 
@@ -27,7 +23,7 @@ class Education extends Component {
                             placeholder={this.props.education.savedInfo.degree ? this.props.education.savedInfo.degree : "e.g. B.S. Computer Science" }
                             onChange={this.props.handleDegreeChange}></input>
                         </div>
-                        <div className="form=group">
+                        <div className="form-group">
                             <label htmlFor={this.props.education.id + "-institution"}>Institution</label>
                             <input type="text" 
                             className="form-control" 
@@ -35,23 +31,7 @@ class Education extends Component {
                             placeholder={this.props.education.savedInfo.institution ? this.props.education.savedInfo.institution : "e.g. University of California Berkeley" }
                             onChange={this.props.handleInstitutionChange}></input>
                         </div>
-                        <div className="form=group">
-                            <label htmlFor={this.props.education.id + "-start"}>Start</label>
-                            <input type="text" 
-                            className="form-control" 
-                            id={this.props.education.id + "-start"}
-                            placeholder={this.props.education.savedInfo.start ? this.props.education.savedInfo.start : "e.g. 2016" }
-                            onChange={this.props.handleEdStartChange}></input>
-                        </div>
-                        <div className="form=group">
-                            <label htmlFor={this.props.education.id + "-end"}>End</label>
-                            <input type="text" 
-                            className="form-control" 
-                            id={this.props.education.id + "-end"}
-                            placeholder={this.props.education.savedInfo.end ? this.props.education.savedInfo.end : "e.g. 2020" }
-                            onChange={this.props.handleEdEndChange}></input>
-                        </div>
-                        <div className="form=group">
+                        <div className="form-group">
                             <label htmlFor={this.props.education.id + "-location"}>Location</label>
                             <input type="text" 
                             className="form-control" 
@@ -59,7 +39,7 @@ class Education extends Component {
                             placeholder={this.props.education.savedInfo.location ? this.props.education.savedInfo.location : "e.g. Berkely, CA" }
                             onChange={this.props.handleEdLocationChange}></input>
                         </div>
-                        <div className="form=group">
+                        <div className="form-group">
                             <label htmlFor={this.props.education.id + "-gpa"}>GPA</label>
                             <input type="text" 
                             className="form-control" 
@@ -67,27 +47,48 @@ class Education extends Component {
                             placeholder={this.props.education.savedInfo.gpa ? this.props.education.savedInfo.gpa : "e.g. 3.93" }
                             onChange={this.props.handleGpaChange}></input>
                         </div>
-                    <button type="submit" 
-                    id={this.props.education.id}
-                    className="btn btn-primary btn-top-margin" 
-                    onClick={this.props.handleEducationSubmit}>Submit</button>
+                        <div className="form-group">
+                            <label htmlFor={this.props.education.id + "-start"}>Start</label>
+                            <input type="text" 
+                            className="form-control" 
+                            id={this.props.education.id + "-start"}
+                            placeholder={this.props.education.savedInfo.start ? this.props.education.savedInfo.start : "e.g. 2016" }
+                            onChange={this.props.handleEdStartChange}></input>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor={this.props.education.id + "-end"}>End</label>
+                            <input type="text" 
+                            className="form-control" 
+                            id={this.props.education.id + "-end"}
+                            placeholder={this.props.education.savedInfo.end ? this.props.education.savedInfo.end : "e.g. 2020" }
+                            onChange={this.props.handleEdEndChange}></input>
+                        </div>
+                        <div className="button-wrapper">
+                            <button type="submit"
+                            className="btn btn-outline-success btn-margin-right btn-margin"
+                            id={this.props.education.id + '-submit'}
+                            onClick={this.props.handleEducationSubmit}><FontAwesomeIcon icon={faCheckSquare} /></button>
+                            <button className="btn btn-outline-danger btn-margin"
+                            id={this.props.education.id + "-delete"}
+                            onClick={this.props.handleDeleteEducation}><FontAwesomeIcon icon={faTrash} /></button>
+                        </div>
                 </form>
-                <button className={this.props.education.id + " btn btn-primary btn-top-margin"} 
-                onClick={this.props.handleDeleteEducation}>Delete</button> 
+                
                 </div>
             )
         } else {
             return (
-                <div>
+                <div className="bottom-border">
                     <h2>{this.props.education.savedInfo.degree}</h2>
                     <p className="para-nospacing">{this.props.education.savedInfo.institution}</p>
-                    <p className="para-nospacing">{this.props.education.savedInfo.start}</p>
-                    <p className="para-nospacing">{this.props.education.savedInfo.end}</p>
                     <p className="para-nospacing">{this.props.education.savedInfo.location}</p>
                     <p className="para-nospacing">{this.props.education.savedInfo.gpa}</p>
-                    <button className="btn btn-primary" 
-                    id={this.props.education.id}
-                    onClick={this.props.handleEducationEdit}>Edit</button>
+                    <p className="para-nospacing">{this.props.education.savedInfo.start}–{this.props.education.savedInfo.end}</p>
+                    <div className="button-wrapper">
+                        <button className="btn btn-outline-primary btn-margin"
+                        id={this.props.education.id + "-edit"}
+                        onClick={this.props.handleEducationEdit}><FontAwesomeIcon icon={faEdit} /></button>
+                    </div>
                 </div>
                 
             )

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare } from '@fortawesome/free-solid-svg-icons'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 class Experience extends Component {
     constructor(props) {
@@ -9,7 +13,7 @@ class Experience extends Component {
         
         if (this.props.experience.isInFormMode) {
             return (
-                <div>
+                <div className="bottom-border">
                     <form>
                     <div className="form-group">
                         <label htmlFor={this.props.experience.id + "-position"}>Position</label>
@@ -58,7 +62,7 @@ class Experience extends Component {
                         <input type="text" 
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-0"}
-                        placeholder={this.props.experience.savedInfo.bullets[0] ? this.props.experience.savedInfo.bullets[0] : "e.g. Increased application load times by 15%."}
+                        placeholder={this.props.experience.savedInfo.bullets[0] ? this.props.experience.savedInfo.bullets[0] : "e.g. Decreased application load times by 15%."}
                         onChange={this.props.handleBulletChange}></input>
                     </div>
                     <div className="form-group">
@@ -66,7 +70,7 @@ class Experience extends Component {
                         <input type="text" 
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-1"}
-                        placeholder={this.props.experience.savedInfo.bullets[1] ? this.props.experience.savedInfo.bullets[1] : "e.g. Increased application load times by 15%."}
+                        placeholder={this.props.experience.savedInfo.bullets[1] ? this.props.experience.savedInfo.bullets[1] : "e.g. Decreased application load times by 15%."}
                         onChange={this.props.handleBulletChange}></input>
                     </div>
                     <div className="form-group">
@@ -74,7 +78,7 @@ class Experience extends Component {
                         <input type="text" 
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-2"}
-                        placeholder={this.props.experience.savedInfo.bullets[2] ? this.props.experience.savedInfo.bullets[2] : "e.g. Increased application load times by 15%."}
+                        placeholder={this.props.experience.savedInfo.bullets[2] ? this.props.experience.savedInfo.bullets[2] : "e.g. Decreased application load times by 15%."}
                         onChange={this.props.handleBulletChange}></input>
                     </div>
                     <div className="form-group">
@@ -82,7 +86,7 @@ class Experience extends Component {
                         <input type="text" 
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-3"}
-                        placeholder={this.props.experience.savedInfo.bullets[3] ? this.props.experience.savedInfo.bullets[3] : "e.g. Increased application load times by 15%."}
+                        placeholder={this.props.experience.savedInfo.bullets[3] ? this.props.experience.savedInfo.bullets[3] : "e.g. Decreased application load times by 15%."}
                         onChange={this.props.handleBulletChange}></input>
                     </div>
                     <div className="form-group">
@@ -90,7 +94,7 @@ class Experience extends Component {
                         <input type="text" 
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-4"}
-                        placeholder={this.props.experience.savedInfo.bullets[4] ? this.props.experience.savedInfo.bullets[4] : "e.g. Increased application load times by 15%."}
+                        placeholder={this.props.experience.savedInfo.bullets[4] ? this.props.experience.savedInfo.bullets[4] : "e.g. Decreased application load times by 15%."}
                         onChange={this.props.handleBulletChange}></input>
                     </div>
                     <div className="form-group">
@@ -98,33 +102,36 @@ class Experience extends Component {
                         <input type="text" 
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-5"}
-                        placeholder={this.props.experience.savedInfo.bullets[5] ? this.props.experience.savedInfo.bullets[5] : "e.g. Increased application load times by 15%."}
+                        placeholder={this.props.experience.savedInfo.bullets[5] ? this.props.experience.savedInfo.bullets[5] : "e.g. Decreased application load times by 15%."}
                         onChange={this.props.handleBulletChange}></input>
                     </div>
-                    <button type="submit" 
-                    id={this.props.experience.id} 
-                    className="btn btn-primary btn-top-margin"
-                    onClick={this.props.handleExperienceSubmit}>Submit</button>
+                    <div className="button-wrapper">
+                        <button className="btn btn-outline-success btn-margin-right btn-margin"
+                        id={this.props.experience.id + '-submit'}
+                        onClick={this.props.handleExperienceSubmit}><FontAwesomeIcon icon={faCheckSquare} /></button>
+                        <button className="btn btn-outline-danger btn-margin"
+                        id={this.props.experience.id + '-delete'}
+                        onClick={this.props.handledeleteExperience}><FontAwesomeIcon icon={faTrash} /></button>
+                    </div>
                 </form>
-                <button className={this.props.experience.id + " btn btn-primary btn-top-margin"} 
-                onClick={this.props.handleDeleteExperience}>Delete</button>
                 </div>
                 
             )
         } else {
             return (
-                <div>
+                <div className="bottom-border">
                     <h2>{this.props.experience.savedInfo.position}</h2>
                     <p className="para-nospacing">{this.props.experience.savedInfo.employer}</p>
-                    <p>{this.props.experience.savedInfo.location}</p>
-                    <p className="para-nospacing">{this.props.experience.savedInfo.start}</p>
-                    <p>{this.props.experience.savedInfo.end}</p>
+                    <p className="para-nospacing">{this.props.experience.savedInfo.location}</p>
+                    <p className="para-nospacing">{this.props.experience.savedInfo.start}—{this.props.experience.savedInfo.end}</p>
                     <ul>
-                        {this.props.experience.savedInfo.bullets.filter(bullet => bullet).map(bullet => <li>{bullet}</li>)}
+                        {this.props.experience.savedInfo.bullets.filter(bullet => bullet).map(bullet => <li key={this.props.experience.id + '-bullet-' + this.props.experience.savedInfo.bullets.indexOf(bullet)}>{bullet}</li>)}
                     </ul>
-                    <button id={this.props.experience.id} 
-                    className="btn btn-primary" 
-                    onClick={this.props.handleExperienceEdit}>Edit</button> 
+                    <div className="button-wrapper">
+                    <button id={this.props.experience.id + '-edit'} 
+                    className="btn btn-outline-primary btn-margin" 
+                    onClick={this.props.handleExperienceEdit}><FontAwesomeIcon icon={faEdit} /></button> 
+                    </div>
                 </div>
                 
             )

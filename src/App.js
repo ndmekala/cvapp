@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import uniqid from 'uniqid';
-import Footer from './components/Footer'
+import Header from './components/Header'
+import Hero from './components/Hero'
 import Contact from './components/Contact'
 import Education from './components/Education'
 import Experience from './components/Experience'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
+
+
 
 
 class App extends Component {
@@ -40,7 +45,6 @@ class App extends Component {
     this.handlePhoneChange = this.handlePhoneChange.bind(this)
     this.handleAddressChange = this.handleAddressChange.bind(this)
 
-    this.setExperienceFormMode = this.setExperienceFormMode.bind(this);
     this.handleExperienceSubmit = this.handleExperienceSubmit.bind(this);
     this.handleExperienceEdit = this.handleExperienceEdit.bind(this);
     this.handleAddExperience = this.handleAddExperience.bind(this);
@@ -116,7 +120,7 @@ class App extends Component {
           ...prevState.contact,
           isInFormMode: !this.state.contact.isInFormMode,
         }
-      }), () => console.table(this.state))
+      }))
   }
   handleContactEdit() {
     this.setContactFormMode();
@@ -151,7 +155,7 @@ class App extends Component {
           name: e.target.value,
         }
       }
-    }), () => console.table(this.state))
+    }))
   }
   handleEmailChange(e) {
     this.setState(prevState => ({
@@ -162,7 +166,7 @@ class App extends Component {
           email: e.target.value,
         }
       }
-    }), () => console.table(this.state))
+    }))
   }
   handlePhoneChange(e) {
     this.setState(prevState => ({
@@ -173,7 +177,7 @@ class App extends Component {
           phone: e.target.value,
         }
       }
-    }), () => console.table(this.state))
+    }))
   }
   handleAddressChange(e) {
     this.setState(prevState => ({
@@ -184,14 +188,14 @@ class App extends Component {
           address: e.target.value,
         }
       }
-    }), () => console.table(this.state))
+    }))
   }
   
 
   // Experience EDIT, ADD, DELETE, SUBMIT
-  // CONSOLIDATE THE FOLLOWING 2!
-  setExperienceFormMode(id) {
-    const index = this.idToIndex(this.state.experience, id)
+  
+  handleExperienceEdit(e) {
+    const index = this.idToIndex(this.state.experience, e.target.id.replace('-edit', ''))
     this.setState(prevState => ({
       experience: [
         ...prevState.experience.slice(0, index),
@@ -200,12 +204,9 @@ class App extends Component {
       ]
     }))    
   }
-  handleExperienceEdit(e) {
-    this.setExperienceFormMode(e.target.id);
-  }
   handleExperienceSubmit(e) {
     e.preventDefault();
-    const index = this.idToIndex(this.state.experience, e.target.id)
+    const index = this.idToIndex(this.state.experience, e.target.id.replace('-submit', ''))
     this.setState(prevState => ({
       experience: [
         ...prevState.experience.slice(0, index),
@@ -238,7 +239,7 @@ class App extends Component {
         },
         ...prevState.experience.slice(index+1)
       ]
-    }), () => console.log(this.state.experience))
+    }))
   }
   handleAddExperience() {
     this.setState(prevState => ({
@@ -250,7 +251,7 @@ class App extends Component {
   }
   handleDeleteExperience(e) {
     if (this.state.experience.length > 1) {
-      const id = e.target.classList[0]
+      const id = e.target.id.replace('-delete', '')
       const index = this.idToIndex(this.state.experience, id)
       this.setState(prevState => ({
         experience: [
@@ -274,7 +275,7 @@ class App extends Component {
         }}),
         ...prevState.experience.slice(index+1)
       ]
-    }), () => console.log(this.state.experience[index]))
+    }))
   }
   handleEmployerChange(e) {
     const id = e.target.id.replace('-employer','')
@@ -288,7 +289,7 @@ class App extends Component {
         }}),
         ...prevState.experience.slice(index+1)
       ]
-    }), () => console.log(this.state.experience[index]))
+    }))
   }
   handleExpStartChange(e) {
     const id = e.target.id.replace('-start','')
@@ -302,7 +303,7 @@ class App extends Component {
         }}),
         ...prevState.experience.slice(index+1)
       ]
-    }), () => console.log(this.state.experience[index]))
+    }))
   }
   handleExpEndChange(e) {
     const id = e.target.id.replace('-end','')
@@ -316,11 +317,10 @@ class App extends Component {
         }}),
         ...prevState.experience.slice(index+1)
       ]
-    }), () => console.log(this.state.experience[index]))
+    }))
   }
   handleExpLocationChange(e) {
     const id = e.target.id.replace('-location','')
-    console.log(this.state)
     const index = this.idToIndex(this.state.experience, id)
     this.setState(prevState => ({
       experience: [
@@ -331,10 +331,8 @@ class App extends Component {
         }}),
         ...prevState.experience.slice(index+1)
       ]
-    }), () => console.log(this.state.experience[index]))
+    }))
   }
-  // format of key = (uniqid)-bullet-0
-  // prop as key, make id as well…?
   handleBulletChange(e) {
     const idStr = e.target.id;
     const firstDash = idStr.indexOf('-');
@@ -343,24 +341,27 @@ class App extends Component {
     const expArrInd = this.idToIndex(this.state.experience, expArrId);
     let stateCopy = Object.assign({}, this.state)
     stateCopy.experience[expArrInd].liveInfo.bullets[bulletArrInd] = e.target.value
-    this.setState(stateCopy, () => console.log(this.state))
+    this.setState(stateCopy)
   }
 
   // EDUCATION EDIT, ADD, DELETE, SUBMIT
+
   handleEducationEdit(e) {
-    const id = e.target.id
+    const id = e.target.id.replace('-edit', '')
+    console.log(e.target.id)
     const index = this.idToIndex(this.state.education, id)
     this.setState(prevState => ({
       education: [
         ...prevState.education.slice(0, index),
         Object.assign({}, this.state.education[index], {isInFormMode: !this.state.education[index].isInFormMode}),
-        ...prevState.experience.slice(index+1)
+        ...prevState.education.slice(index+1)
       ]
     }))
   }
   handleEducationSubmit(e) {
     e.preventDefault();
-    const index = this.idToIndex(this.state.education, e.target.id)
+    const id = e.target.id.replace('-submit', '')
+    const index = this.idToIndex(this.state.education, id)
     this.setState(prevState => ({
       education: [
         ...prevState.education.slice(0, index),
@@ -386,7 +387,7 @@ class App extends Component {
         },
         ...prevState.education.slice(index+1)
       ]
-    }), () => console.log(this.state.education))
+    }))
   }
   handleAddEducation() {
     this.setState(prevState => ({
@@ -398,7 +399,7 @@ class App extends Component {
   }
   handleDeleteEducation(e) {
     if (this.state.education.length > 1) {
-      const id = e.target.classList[0]
+      const id = e.target.id.replace('-delete', '')
       const index = this.idToIndex(this.state.education, id)
       this.setState(prevState => ({
         education: [
@@ -421,7 +422,7 @@ class App extends Component {
         }}),
         ...prevState.education.slice(index + 1)
       ]
-    }), () => console.log(this.state.education[index]))
+    }))
   } 
   handleInstitutionChange(e) { 
     const id = e.target.id.replace('-institution', '')
@@ -435,7 +436,7 @@ class App extends Component {
         }}),
         ...prevState.education.slice(index + 1)
       ]
-    }), () => console.log(this.state.education[index]))
+    }))
   } 
   handleEdStartChange(e) {
     const id = e.target.id.replace('-start', '')
@@ -449,7 +450,7 @@ class App extends Component {
         }}),
         ...prevState.education.slice(index + 1)
       ]
-    }), () => console.log(this.state.education[index]))
+    }))
   } 
   handleEdEndChange(e) {
     const id = e.target.id.replace('-end', '')
@@ -463,7 +464,7 @@ class App extends Component {
         }}),
         ...prevState.education.slice(index + 1)
       ]
-    }), () => console.log(this.state.education[index]))
+    }))
   } 
   handleEdLocationChange(e) {
     const id = e.target.id.replace('-location', '')
@@ -477,7 +478,7 @@ class App extends Component {
         }}),
         ...prevState.education.slice(index + 1)
       ]
-    }), () => console.log(this.state.education[index]))
+    }))
   } 
   handleGpaChange(e) {
     const id = e.target.id.replace('-gpa', '')
@@ -491,56 +492,70 @@ class App extends Component {
         }}),
         ...prevState.education.slice(index + 1)
       ]
-    }), () => console.log(this.state.education[index]))
+    }))
   }
   
 
 
   render() {
     return (
-      <div className="d-flex flex-column h-100">
-        <main className="flex-shrink-0">
+      <div>
+        <Header />
+        <Hero />
+        <main>
           <div className="container">
-            <h1 className="text-muted">Contact</h1>
-            <Contact contact={this.state.contact} 
-            handleContactSubmit={this.handleContactSubmit} 
-            handleContactEdit={this.handleContactEdit}
-            handleNameChange={this.handleNameChange}
-            handleEmailChange={this.handleEmailChange}
-            handlePhoneChange={this.handlePhoneChange}
-            handleAddressChange={this.handleAddressChange}/>
-            <h1 className="text-muted">Experience</h1>
-            {this.state.experience.map(exp => (
-              <Experience experience={exp}
-              handlePositionChange={this.handlePositionChange} 
-              handleEmployerChange={this.handleEmployerChange} 
-              handleExpStartChange={this.handleExpStartChange} 
-              handleExpEndChange={this.handleExpEndChange} 
-              handleExpLocationChange={this.handleExpLocationChange} 
-              handleBulletChange={this.handleBulletChange}
-              handleDeleteExperience={this.handleDeleteExperience}
-              handleExperienceSubmit={this.handleExperienceSubmit} 
-              handleExperienceEdit={this.handleExperienceEdit} />
-            ))}
-            <button className="btn btn-primary btn-top-margin" onClick={this.handleAddExperience}>Add</button>
-            <h1 className="text-muted">Education</h1>
-            {this.state.education.map(ed => (
-              <Education education={ed}
-              handleDegreeChange={this.handleDegreeChange} 
-              handleInstitutionChange={this.handleInstitutionChange} 
-              handleEdStartChange={this.handleEdStartChange} 
-              handleEdEndChange={this.handleEdEndChange} 
-              handleEdLocationChange={this.handleEdLocationChange} 
-              handleGpaChange={this.handleGpaChange} 
-              handleDeleteEducation={this.handleDeleteEducation} 
-              handleEducationSubmit={this.handleEducationSubmit} 
-              handleEducationEdit={this.handleEducationEdit}/> 
-            ))}
-            <button className="btn btn-primary btn-top-margin" onClick={this.handleAddEducation}>Add</button>
-
+            <div className="row">
+              <div className="col-lg">
+                <h1 className="text-muted">Contact</h1>
+                <Contact contact={this.state.contact} 
+                handleContactSubmit={this.handleContactSubmit} 
+                handleContactEdit={this.handleContactEdit}
+                handleNameChange={this.handleNameChange}
+                handleEmailChange={this.handleEmailChange}
+                handlePhoneChange={this.handlePhoneChange}
+                handleAddressChange={this.handleAddressChange}/>
+              </div>
+              <div className="col-lg">
+                <h1 className="text-muted">Experience</h1>
+                {this.state.experience.map(exp => (
+                  <Experience experience={exp}
+                  key={exp.id}
+                  handlePositionChange={this.handlePositionChange} 
+                  handleEmployerChange={this.handleEmployerChange} 
+                  handleExpStartChange={this.handleExpStartChange} 
+                  handleExpEndChange={this.handleExpEndChange} 
+                  handleExpLocationChange={this.handleExpLocationChange} 
+                  handleBulletChange={this.handleBulletChange}
+                  handleDeleteExperience={this.handleDeleteExperience}
+                  handleExperienceSubmit={this.handleExperienceSubmit} 
+                  handleExperienceEdit={this.handleExperienceEdit} />
+                ))}
+                <div className="plus-button-wrapper">
+                <div className="btn btn-outline-primary plus-button" onClick={this.handleAddExperience}><FontAwesomeIcon icon={faPlusSquare} size="4x"/></div>
+                </div>
+              </div>
+              <div className="col-lg">
+                <h1 className="text-muted">Education</h1>
+                {this.state.education.map(ed => (
+                  <Education education={ed}
+                  key={ed.id}
+                  handleDegreeChange={this.handleDegreeChange} 
+                  handleInstitutionChange={this.handleInstitutionChange} 
+                  handleEdStartChange={this.handleEdStartChange} 
+                  handleEdEndChange={this.handleEdEndChange} 
+                  handleEdLocationChange={this.handleEdLocationChange} 
+                  handleGpaChange={this.handleGpaChange} 
+                  handleDeleteEducation={this.handleDeleteEducation} 
+                  handleEducationSubmit={this.handleEducationSubmit} 
+                  handleEducationEdit={this.handleEducationEdit}/> 
+                ))}
+                <div className="plus-button-wrapper">
+                <button className="btn btn-outline-primary plus-button" onClick={this.handleAddEducation}><FontAwesomeIcon icon={faPlusSquare} size="4x"/></button>
+                </div>
+              </div>
+            </div>
           </div>
         </main>
-        <Footer />
         </div>
     )
   }
