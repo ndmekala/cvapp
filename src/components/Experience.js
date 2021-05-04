@@ -123,7 +123,7 @@ class Experience extends Component {
                     <h2>{this.props.experience.savedInfo.position}</h2>
                     <p className="para-nospacing">{this.props.experience.savedInfo.employer}</p>
                     <p className="para-nospacing">{this.props.experience.savedInfo.location}</p>
-                    <p className="para-nospacing">{this.props.experience.savedInfo.start}—{this.props.experience.savedInfo.end}</p>
+                    <p className="para-nospacing">{this.props.experience.savedInfo.start}–{this.props.experience.savedInfo.end}</p>
                     <ul>
                         {this.props.experience.savedInfo.bullets.filter(bullet => bullet).map(bullet => <li key={this.props.experience.id + '-bullet-' + this.props.experience.savedInfo.bullets.indexOf(bullet)}>{bullet}</li>)}
                     </ul>
