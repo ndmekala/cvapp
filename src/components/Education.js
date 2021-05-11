@@ -36,7 +36,7 @@ class Education extends Component {
                             <input type="text" 
                             className="form-control" 
                             id={this.props.education.id + "-location"}
-                            placeholder={this.props.education.savedInfo.location ? this.props.education.savedInfo.location : "e.g. Berkely, CA" }
+                            placeholder={this.props.education.savedInfo.location ? this.props.education.savedInfo.location : "e.g. Berkeley, CA" }
                             onChange={this.props.handleEducationChange}></input>
                         </div>
                         <div className="form-group">
