@@ -21,7 +21,7 @@ class Education extends Component {
                             className="form-control" 
                             id={this.props.education.id + "-degree"}
                             placeholder={this.props.education.savedInfo.degree ? this.props.education.savedInfo.degree : "e.g. B.S. Computer Science" }
-                            onChange={this.props.handleDegreeChange}></input>
+                            onChange={this.props.handleEducationChange}></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor={this.props.education.id + "-institution"}>Institution</label>
@@ -29,7 +29,7 @@ class Education extends Component {
                             className="form-control" 
                             id={this.props.education.id + "-institution"}
                             placeholder={this.props.education.savedInfo.institution ? this.props.education.savedInfo.institution : "e.g. University of California Berkeley" }
-                            onChange={this.props.handleInstitutionChange}></input>
+                            onChange={this.props.handleEducationChange}></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor={this.props.education.id + "-location"}>Location</label>
@@ -37,7 +37,7 @@ class Education extends Component {
                             className="form-control" 
                             id={this.props.education.id + "-location"}
                             placeholder={this.props.education.savedInfo.location ? this.props.education.savedInfo.location : "e.g. Berkely, CA" }
-                            onChange={this.props.handleEdLocationChange}></input>
+                            onChange={this.props.handleEducationChange}></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor={this.props.education.id + "-gpa"}>GPA</label>
@@ -45,7 +45,7 @@ class Education extends Component {
                             className="form-control" 
                             id={this.props.education.id + "-gpa"}
                             placeholder={this.props.education.savedInfo.gpa ? this.props.education.savedInfo.gpa : "e.g. 3.93" }
-                            onChange={this.props.handleGpaChange}></input>
+                            onChange={this.props.handleEducationChange}></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor={this.props.education.id + "-start"}>Start</label>
@@ -53,7 +53,7 @@ class Education extends Component {
                             className="form-control" 
                             id={this.props.education.id + "-start"}
                             placeholder={this.props.education.savedInfo.start ? this.props.education.savedInfo.start : "e.g. 2016" }
-                            onChange={this.props.handleEdStartChange}></input>
+                            onChange={this.props.handleEducationChange}></input>
                         </div>
                         <div className="form-group">
                             <label htmlFor={this.props.education.id + "-end"}>End</label>
@@ -61,7 +61,7 @@ class Education extends Component {
                             className="form-control" 
                             id={this.props.education.id + "-end"}
                             placeholder={this.props.education.savedInfo.end ? this.props.education.savedInfo.end : "e.g. 2020" }
-                            onChange={this.props.handleEdEndChange}></input>
+                            onChange={this.props.handleEducationChange}></input>
                         </div>
                         <div className="button-wrapper">
                             <button type="submit"

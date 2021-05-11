@@ -21,7 +21,7 @@ class Experience extends Component {
                         className="form-control" 
                         id={this.props.experience.id + "-position"}
                         placeholder={this.props.experience.savedInfo.position ? this.props.experience.savedInfo.position : "e.g. Junior Developer" }
-                        onChange={this.props.handlePositionChange}></input>
+                        onChange={this.props.handleExpChange}></input>
                     </div>
                     <div className="form-group">
                         <label htmlFor={this.props.experience.id + "-employer"}>Employer</label>
@@ -29,7 +29,7 @@ class Experience extends Component {
                         className="form-control" 
                         id={this.props.experience.id + "-employer"}
                         placeholder={this.props.experience.savedInfo.employer ? this.props.experience.savedInfo.employer : "e.g. Mozilla Corporation"}
-                        onChange={this.props.handleEmployerChange}></input>
+                        onChange={this.props.handleExpChange}></input>
                     </div>
                     <div className="form-group">
                         <label htmlFor={this.props.experience.id + "-location"}>Location</label>
@@ -37,7 +37,7 @@ class Experience extends Component {
                         className="form-control" 
                         id={this.props.experience.id + "-location"}
                         placeholder={this.props.experience.savedInfo.location ? this.props.experience.savedInfo.location : "e.g. San Francisco, CA"}
-                        onChange={this.props.handleExpLocationChange}></input>
+                        onChange={this.props.handleExpChange}></input>
                     </div>
                     <div className="form-group">
                         <label htmlFor={this.props.experience.id + "-start"}>Start Date</label>
@@ -45,7 +45,7 @@ class Experience extends Component {
                         className="form-control" 
                         id={this.props.experience.id + "-start"}
                         placeholder={this.props.experience.savedInfo.start ? this.props.experience.savedInfo.start : "e.g. May 2015"}
-                        onChange={this.props.handleExpStartChange}></input>
+                        onChange={this.props.handleExpChange}></input>
                     </div>
                     <div className="form-group">
                         <label htmlFor={this.props.experience.id + "-end"}>End Date</label>
@@ -53,7 +53,7 @@ class Experience extends Component {
                         className="form-control" 
                         id={this.props.experience.id + "-end"}
                         placeholder={this.props.experience.savedInfo.end ? this.props.experience.savedInfo.end : "e.g. Jan 2019"}
-                        onChange={this.props.handleExpEndChange}></input>
+                        onChange={this.props.handleExpChange}></input>
                     </div>
 
                     {/* BULLETS */}
@@ -63,7 +63,7 @@ class Experience extends Component {
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-0"}
                         placeholder={this.props.experience.savedInfo.bullets[0] ? this.props.experience.savedInfo.bullets[0] : "e.g. Decreased application load times by 15%."}
-                        onChange={this.props.handleBulletChange}></input>
+                        onChange={this.props.handleExpBulletChange}></input>
                     </div>
                     <div className="form-group">
                         <label htmlFor={this.props.experience.id + "-bullet-1"}>Bullet Point Description</label>
@@ -71,7 +71,7 @@ class Experience extends Component {
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-1"}
                         placeholder={this.props.experience.savedInfo.bullets[1] ? this.props.experience.savedInfo.bullets[1] : "e.g. Decreased application load times by 15%."}
-                        onChange={this.props.handleBulletChange}></input>
+                        onChange={this.props.handleExpBulletChange}></input>
                     </div>
                     <div className="form-group">
                         <label htmlFor={this.props.experience.id + "-bullet-2"}>Bullet Point Description</label>
@@ -79,7 +79,7 @@ class Experience extends Component {
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-2"}
                         placeholder={this.props.experience.savedInfo.bullets[2] ? this.props.experience.savedInfo.bullets[2] : "e.g. Decreased application load times by 15%."}
-                        onChange={this.props.handleBulletChange}></input>
+                        onChange={this.props.handleExpBulletChange}></input>
                     </div>
                     <div className="form-group">
                         <label htmlFor={this.props.experience.id + "-bullet-3"}>Bullet Point Description</label>
@@ -87,7 +87,7 @@ class Experience extends Component {
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-3"}
                         placeholder={this.props.experience.savedInfo.bullets[3] ? this.props.experience.savedInfo.bullets[3] : "e.g. Decreased application load times by 15%."}
-                        onChange={this.props.handleBulletChange}></input>
+                        onChange={this.props.handleExpBulletChange}></input>
                     </div>
                     <div className="form-group">
                         <label htmlFor={this.props.experience.id + "-bullet-4"}>Bullet Point Description</label>
@@ -95,7 +95,7 @@ class Experience extends Component {
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-4"}
                         placeholder={this.props.experience.savedInfo.bullets[4] ? this.props.experience.savedInfo.bullets[4] : "e.g. Decreased application load times by 15%."}
-                        onChange={this.props.handleBulletChange}></input>
+                        onChange={this.props.handleExpBulletChange}></input>
                     </div>
                     <div className="form-group">
                         <label htmlFor={this.props.experience.id + "-bullet-5"}>Bullet Point Description</label>
@@ -103,7 +103,7 @@ class Experience extends Component {
                         className="form-control" 
                         id={this.props.experience.id + "-bullet-5"}
                         placeholder={this.props.experience.savedInfo.bullets[5] ? this.props.experience.savedInfo.bullets[5] : "e.g. Decreased application load times by 15%."}
-                        onChange={this.props.handleBulletChange}></input>
+                        onChange={this.props.handleExpBulletChange}></input>
                     </div>
                     <div className="button-wrapper">
                         <button className="btn btn-outline-success btn-margin-right btn-margin"
@@ -111,7 +111,7 @@ class Experience extends Component {
                         onClick={this.props.handleExperienceSubmit}><FontAwesomeIcon icon={faCheckSquare} /></button>
                         <button className="btn btn-outline-danger btn-margin"
                         id={this.props.experience.id + '-delete'}
-                        onClick={this.props.handledeleteExperience}><FontAwesomeIcon icon={faTrash} /></button>
+                        onClick={this.props.handleDeleteExperience}><FontAwesomeIcon icon={faTrash} /></button>
                     </div>
                 </form>
                 </div>

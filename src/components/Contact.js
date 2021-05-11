@@ -19,7 +19,7 @@ class Contact extends Component {
                             <input type="text" 
                             className="form-control" 
                             id="name" 
-                            onChange={this.props.handleNameChange} 
+                            onChange={this.props.handleContactChange} 
                             placeholder={this.props.contact.savedInfo.name ? this.props.contact.savedInfo.name : 'e.g. Jane Doe'}></input>
                         </div>
                         <div className="form-group">
@@ -27,7 +27,7 @@ class Contact extends Component {
                             <input type="email" 
                             className="form-control" 
                             id="email" 
-                            onChange={this.props.handleEmailChange} 
+                            onChange={this.props.handleContactChange} 
                             placeholder={this.props.contact.savedInfo.email ? this.props.contact.savedInfo.email : "e.g. janedoe@gmail.com"}></input>
                         </div>
                         <div className="form-group">
@@ -35,7 +35,7 @@ class Contact extends Component {
                             <input type="text" 
                             className="form-control" 
                             id="phone" 
-                            onChange={this.props.handlePhoneChange} 
+                            onChange={this.props.handleContactChange} 
                             placeholder={this.props.contact.savedInfo.phone ? this.props.contact.savedInfo.phone : "e.g. (111) 111 1111"}></input>
                         </div>
                         <div className="form-group">
@@ -43,7 +43,7 @@ class Contact extends Component {
                             <input type="text" 
                             className="form-control" 
                             id="address" 
-                            onChange={this.props.handleAddressChange} 
+                            onChange={this.props.handleContactChange} 
                             placeholder={this.props.contact.savedInfo.address ? this.props.contact.savedInfo.address : "e.g. 111 Fairfax Ln. Beverly Hills, CA 90210 "}></input>
                         </div>
                         <div className="button-wrapper">
